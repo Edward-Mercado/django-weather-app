@@ -7,5 +7,4 @@ def main(request):
     context = {}
     return HttpResponse(template.render(context, request))
     
-    
 # Create your views here.
