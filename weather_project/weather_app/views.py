@@ -6,5 +6,8 @@ def main(request):
     template = loader.get_template('main.html')
     context = {}
     return HttpResponse(template.render(context, request))
-    
+
+def search(request):
+    template = loader.get_template('index.html')
+
 # Create your views here.
