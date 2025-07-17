@@ -1,31 +1,51 @@
-v<!DOCTYPE html>
+<!DOCTYPE html>
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
 <head>
     <title> WEATHER API TESTER </title>
-
+    <style> 
+        .attribute {
+        width: 400px;
+        background-color: rgb(45, 80, 140);
+        padding: 12px;
+        border-color: rgb(13, 69, 105);
+        border-style: solid;
+        border-width: 12px;
+        width:50%;
+        margin:10px auto;
+        color: white; 
+        }
+    </style>
 </head>
 
 <body>
     <h1 style="text-align: center"> Weather in {{ name }}, on {{ date }} </h1>
     <div class="main_div">
 
-        <div class="attribute_div">
-            <h1> {{ temperature }} °C </h1>
+        <div class="attribute">
+            <h1> TEMPERATURE </h1>
+            <h2> {{ temperature }}°C </h2>
         </div>
 
-        <div class="attribute_div">
-            <h1> {{ weather }} </h1>
+        <div class="attribute">
+            <h1> DESCRIPTION OF WEATHER </h1>
+            <h2> {{ weather }} </h2>
         </div>
 
-        <div class="attribute_div">
-            <h1> {{ humidity }} </h1>
+        <div class="attribute">
+            <h1> HUMIDITY </h1>
+            <h2> {{ humidity }}%% </h2>
         </div>
 
-        <div class="attribute_div">
-            <h1> {{ wind_speed }} </h1>
+        <div class="attribute">
+            <h1> WIND SPEED </h1>
+            <h2> {{ wind_speed }}m/s </h2>
         </div>
+
+        <div style="padding:6px"> </div>
+
+        <a href="/" class="search_button"> HOME </a>
 
     </div>
 </body>

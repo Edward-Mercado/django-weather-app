@@ -12,10 +12,10 @@
     <div class="main_div">
         <h1> Search for a city or a country. </h1>
         <div style="width:50%;margin:10px auto" class="search_box_div">
-            <form method="POST" action="test-processing">
+            <form method="POST" action="/test-processing">
             {% csrf_token %}
             <input type="text" id="user_input" name="user_input" required> <br> </br>
-            <button type="submit" class = "search_button"> SEARCH! </button> 
+            <button type="submit" class = "search_button"> SEARCH </button> 
         </form>
         </div>
     </div>

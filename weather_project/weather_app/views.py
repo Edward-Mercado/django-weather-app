@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .search import search_for_city
 
 def main(request):
@@ -16,7 +16,17 @@ def search(request):
         
         if context['valid'] == True:
             template = loader.get_template('index.html')
-            return HttpResponse(template.render(context, request))
+            return HttpResponseRedirect(template.render(context, request))
         if context['valid'] == False:
             template = loader.get_template('blank.html')
             return HttpResponse(template.render(context, request))
+        
+def change_url(request):
+    template = loader.get_template('index.html')
+    if request.method == "POST":
+        user_input = request.POST.get('user_input')
+        
+        context = search_for_city(user_input)
+        
+        return redirect('change_url', parameter=user_input, context=context)
+    return render(request, template)
