@@ -32,7 +32,13 @@ def get_temp_color(temp):
     return temp_color
 
 def get_weather_image(weather):
-    pass
+    clouds = [ ]
+    sun = [ ]
+    rain = [ ]
+    snow = [ ]
+    storm = [ ]
+    
+    # find the different forms of weather that the api uses, categorize them, find a way to filter and search, return that value
     
 def search_for_city(cityinput): 
     city = cityinput.replace("_", " ").title()
@@ -75,3 +81,25 @@ def search_for_city(cityinput):
             'wind_speed' : None, # m/s
             'date' : None,
         }
+        
+        
+        
+"""
+Clear: Clear skies.
+Sunny: Direct sunlight.
+Partly cloudy: Some clouds in the sky.
+Mostly cloudy: Mostly cloudy with some clear patches.
+Overcast: Completely covered by clouds.
+Light rain: Gentle rainfall.
+Rain: Moderate rainfall.
+Heavy rain: Intense rainfall.
+Light snow: Light snowfall.
+Snow: Moderate snowfall.
+Thunderstorm: Storm with thunder and lightning.
+Scattered clouds: Clouds scattered across the sky.
+Broken clouds: A mix of clouds and clear skies, with some clouds covering the sky.
+Few clouds: A small amount of clouds in the sky.
+Scattered showers: Showers occurring in scattered locations.
+Freezing drizzle: Drizzle that freezes upon contact with surfaces.
+Sleet snow: A mix of rain and snow.
+"""
