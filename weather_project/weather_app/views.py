@@ -11,12 +11,12 @@ def main(request):
 def search(request):
     if request.method == "POST":
         user_input = request.POST.get('user_input')
-        template = loader.get_template('index.html')
-        search_for_city()
         
+        context = search_for_city(user_input)
         
-        context = {'user_input' : user_input}
-        
-        return HttpResponse(template.render(context, request))
-    
-    return HttpResponse('damn')
+        if context['valid'] == True:
+            template = loader.get_template('index.html')
+            return HttpResponse(template.render(context, request))
+        if context['valid'] == False:
+            template = loader.get_template('blank.html')
+            return HttpResponse(template.render(context, request))

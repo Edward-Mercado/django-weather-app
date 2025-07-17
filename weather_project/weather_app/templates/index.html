@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+v<!DOCTYPE html>
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
@@ -8,8 +8,24 @@
 </head>
 
 <body>
-    <h1 style="text-align: center"> TITLE </h1>
+    <h1 style="text-align: center"> Weather in {{ name }}, on {{ date }} </h1>
     <div class="main_div">
-        <h1> {{ user_input }} </h1>
+
+        <div class="attribute_div">
+            <h1> {{ temperature }} °C </h1>
+        </div>
+
+        <div class="attribute_div">
+            <h1> {{ weather }} </h1>
+        </div>
+
+        <div class="attribute_div">
+            <h1> {{ humidity }} </h1>
+        </div>
+
+        <div class="attribute_div">
+            <h1> {{ wind_speed }} </h1>
+        </div>
+
     </div>
 </body>
