@@ -19,4 +19,5 @@ def search(request):
         form = MyForm()
         
     return render(request, 'weather_app/main.html', {'form': form})
+    template = loader.get_template('index.html')
 # Create your views here.
