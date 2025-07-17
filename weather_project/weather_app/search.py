@@ -39,6 +39,9 @@ def get_weather_image(weather):
     storm = [ ]
     
     # find the different forms of weather that the api uses, categorize them, find a way to filter and search, return that value
+    # js do an "if weather in clouds: weather_image = saldfjads;f"
+    # if weather in sun: weather_image = asdfja;sdlfkj
+    # an so on
     
 def search_for_city(cityinput): 
     city = cityinput.replace("_", " ").title()
