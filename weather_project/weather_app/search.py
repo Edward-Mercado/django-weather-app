@@ -30,6 +30,9 @@ def get_temp_color(temp):
     temp_color = colors[color_index]
 
     return temp_color
+
+def get_weather_image(weather):
+    pass
     
 def search_for_city(cityinput): 
     city = cityinput.replace("_", " ").title()
