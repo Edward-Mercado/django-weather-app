@@ -34,7 +34,6 @@ def change_url(request):
 
 def input_view(request): 
     if request.method == "POST":
-        print(request.POST.get('user_input').replace(" ", "_"))
         city_target = request.POST.get('user_input').replace(" ", "_")
         if city_target:
             return redirect('city', city_name = city_target)
@@ -44,7 +43,7 @@ def input_view(request):
 
 def city_view(request, city_name):
     context = search_for_city(city_name)
-   
+    print(context['temp_color'])
     if context['valid'] == True:
         template = loader.get_template('index.html')
         return HttpResponse(template.render(context, request))

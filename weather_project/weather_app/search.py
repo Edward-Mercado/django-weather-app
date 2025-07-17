@@ -1,4 +1,4 @@
-import requests
+import requests, math
 from datetime import date
 
 API_KEY = "c5da7f6762e05a36fc3391a80e90e947"
@@ -16,6 +16,20 @@ def convert_date(date):
     day = int(pieces_of_date[2])
     month = months[int(pieces_of_date[1])]
     return f"{month} {day}, {year}"
+
+def get_temp_color(temp):
+    colors = [
+        "#BDF6FF", "#35C3D9", "#61D7AC", "#5BE673",
+        "#52D936", "#FDF670", "#FFB54C", "#FF8C7A", "#FA6969"
+              ]
+    color_index = math.floor(temp/5) # returns greatest integer < temp 
+
+    if color_index > 7: # handles if we have temp > 40 dg celsius
+        color_index = 8
+    
+    temp_color = colors[color_index]
+
+    return temp_color
     
 def search_for_city(cityinput): 
     city = cityinput.replace("_", " ").title()
@@ -40,6 +54,7 @@ def search_for_city(cityinput):
             'valid' : True,
             'name' : city,
             'temperature' : city_temp, # celsius
+            'temp_color' : get_temp_color(city_temp), # hex
             'weather' : city_weather_description,
             'humidity' : city_humidity, # %
             'wind_speed' : city_wind_speed, # m/s
@@ -51,9 +66,9 @@ def search_for_city(cityinput):
             'valid' : False,
             'name' : None,
             'temperature' : None,  # celsius
+            'temp_color' : get_temp_color(city_temp), # hex
             'weather' : None,
             'humidity' : None, # %
             'wind_speed' : None, # m/s
             'date' : None,
         }
-        
