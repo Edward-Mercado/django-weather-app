@@ -57,4 +57,3 @@ def search_for_city(cityinput):
             'date' : None,
         }
         
-print(search_for_city('asdf'))

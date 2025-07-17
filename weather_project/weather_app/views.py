@@ -16,7 +16,7 @@ def search(request):
         
         if context['valid'] == True:
             template = loader.get_template('index.html')
-            return HttpResponseRedirect(template.render(context, request))
+            return HttpResponse(template.render(context, request))
         if context['valid'] == False:
             template = loader.get_template('blank.html')
             return HttpResponse(template.render(context, request))
@@ -30,3 +30,24 @@ def change_url(request):
         
         return redirect('change_url', parameter=user_input, context=context)
     return render(request, template)
+
+
+def input_view(request): 
+    if request.method == "POST":
+        print(request.POST.get('user_input').replace(" ", "_"))
+        city_target = request.POST.get('user_input').replace(" ", "_")
+        if city_target:
+            return redirect('city', city_name = city_target)
+    
+    template = loader.get_template("blank.html")    
+    return HttpResponse(template.render({}, request))
+
+def city_view(request, city_name):
+    context = search_for_city(city_name)
+   
+    if context['valid'] == True:
+        template = loader.get_template('index.html')
+        return HttpResponse(template.render(context, request))
+    if context['valid'] == False:
+        template = loader.get_template('blank.html')
+        return HttpResponse(template.render(context, request))
