@@ -52,9 +52,7 @@ def input_view(request):
     return HttpResponse(template.render({}, request))
 
 def random_view(request):
-    if request.method == "POST":
-        
-        cities = [
+    cities = [
     "Tokyo", "Brazil", "Cairo", "Germany", "Nairobi", "Mexico City", "Thailand", "Helsinki", "Lima", "Canada",
     "Istanbul", "Vietnam", "Jakarta", "Morocco", "Manila", "France", "Buenos Aires", "Norway", "Seoul", "Ethiopia",
     "Kuala Lumpur", "Italy", "Baghdad", "Russia", "Santiago", "Kenya", "Amsterdam", "India", "Riyadh", "Portugal",
@@ -89,15 +87,12 @@ def random_view(request):
     "Colombo", "Sri Lanka", "Male", "Maldives", "Singapore", "Singapore", "Honiara", "Solomon Islands", "Tarawa", "Kiribati"
 ]
         
-        city_target = cities[random.randint(0, 299)]
+    city_target = cities[random.randint(0, 299)].lower()
         
-        if search_for_city(city_target)['valid'] == True:
-            return redirect('city', city_name = city_target, units="metric")
-        else:
-            return redirect('city', city_name = "invalid", units = "invalid")
-    
-    template = loader.get_template("blank.html")    
-    return HttpResponse(template.render({}, request))
+    if search_for_city(city_target)['valid'] == True:
+        return redirect('city', city_name = city_target, units="metric")
+    else:
+        return redirect('city', city_name = "invalid", units = "invalid")
 
 def city_view(request, city_name, units):
     prep_context = search_for_city(city_name)

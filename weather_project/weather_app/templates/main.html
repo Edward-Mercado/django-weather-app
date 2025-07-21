@@ -18,10 +18,17 @@
             {% csrf_token %}
             <label for="user_input"> City Name: </label>
             <input type="text" id="user_input" name="user_input" required> <br> </br>
-            <label for="units"> Use Imperial Units </label>
+            <label for="units"> Search with Imperial Units </label>
             <input type="checkbox" id="units" name="unit_type"> <br> </br>
-            <button type="submit" class = "search_button"> SEARCH </button> 
+            <button type="submit" class = "search_button"> SEARCH </button> <br> </br>
         </form>
+        <div class="big_filler"> 
+            <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
+        </div>
+    <a href="/input/random" class="search_button"> Try a Random Place </a>
+    </div>
+    <div class="big_filler"> 
+            <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
         </div>
     </div>
 
