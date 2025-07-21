@@ -23,6 +23,8 @@
 
 <body>
     <h1 style="text-align: center"> Weather in {{ name }}, on {{ date }} </h1>
+    <h3 style="text-align: center"> This page uses {{ units }} units. <a href="/search/{{ snake_cased_name }}/{{ reverse_units }}"> Switch? </a> </h3>
+
     <div class="main_div">
 
         <div class="attribute" style="background-color: {{ temp_color }}; color: black;">

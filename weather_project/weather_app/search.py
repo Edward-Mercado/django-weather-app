@@ -63,8 +63,10 @@ def convert_to_imperial(city_data):
     city_wind_speed_mps = float(city_data['wind_speed'].strip(" m/s"))
     city_wind_speed_mph = (int(city_wind_speed_mps*22.3694) / 10)
     
-    city_data['temperature'] = f"{city_temp_f} °F"
+    city_data['temperature'] = f"{int(city_temp_f)} °F"
     city_data['wind_speed'] = f"{city_wind_speed_mph} mph"
+    city_data['units'] = "imperial"
+    city_data['reverse_units'] = "metric"
     
     return city_data
 
@@ -83,6 +85,7 @@ def check_search_validity(cityinput):
         return False
 
 def search_for_city(cityinput): 
+    snake_cased_name = cityinput
     city = cityinput.replace("_", " ").title()
     
     params = {
@@ -103,6 +106,7 @@ def search_for_city(cityinput):
         city_wind_speed = data['wind']['speed']
         return {
             'valid' : True,
+            "snake_cased_name": snake_cased_name,
             'name' : city,
             'temperature' : f"{city_temp} °C", # celsius
             'temp_color' : get_temp_color(city_temp), # hex
@@ -111,11 +115,14 @@ def search_for_city(cityinput):
             'humidity' : city_humidity, # %
             'wind_speed' : f"{city_wind_speed} m/s", # m/s
             'date' : city_date, 
+            "units": "metric",
+            "reverse_units": "imperial",
         }
         
     else:
         return {
             'valid' : False,
+            "snake_cased_name": None,
             'name' : None,
             'temperature' : None,  # celsius
             'temp_color' : None, # hex
@@ -124,4 +131,6 @@ def search_for_city(cityinput):
             'humidity' : None, # %
             'wind_speed' : None, # m/s
             'date' : None,
+            "units": "metric",
+            "reverse_units": "imperial",
         }
