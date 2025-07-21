@@ -7,14 +7,14 @@ BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 def convert_date(date):
     # YYYY - MM - DD
     months = [
-        "index_0", "January", "February", "March", "April", "May", "June", 
+        "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December"
     ]
     
     pieces_of_date = str(date).split("-")
     year = pieces_of_date[0]
     day = int(pieces_of_date[2])
-    month = months[int(pieces_of_date[1])]
+    month = months[int(pieces_of_date[1])-1]
     return f"{month} {day}, {year}"
 
 def get_temp_color(temp):
@@ -67,6 +67,20 @@ def convert_to_imperial(city_data):
     city_data['wind_speed'] = f"{city_wind_speed_mph} mph"
     
     return city_data
+
+def check_search_validity(cityinput):
+    city = cityinput.replace("_", " ").title()
+
+    response = requests.get(BASE_URL, params={
+    "q": city,
+    "appid": API_KEY,
+    "units": "metric"
+    })
+
+    if response.status_code == 200:
+        return True
+    else:
+        return False
 
 def search_for_city(cityinput): 
     city = cityinput.replace("_", " ").title()
