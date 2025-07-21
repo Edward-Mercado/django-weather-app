@@ -3,6 +3,8 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from .search import convert_to_imperial
 from .search import search_for_city
+from .search import convert_date
+from datetime import date
 
 def main(request):
     template = loader.get_template('main.html')
@@ -50,13 +52,14 @@ def input_view(request):
 
 def city_view(request, city_name, units):
     prep_context = search_for_city(city_name)
-
+    
     if prep_context['valid'] == True:
         template = loader.get_template('index.html')
         context = prep_context
         if units == "imperial": # shush, please
             context = convert_to_imperial(prep_context)
-        
+            context['date'] = convert_date(date.today(), "mmddyyyy")
+
         return HttpResponse(template.render(context, request))
     elif prep_context['valid'] == False:
         template = loader.get_template('blank.html')

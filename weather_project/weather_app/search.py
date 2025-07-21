@@ -4,7 +4,7 @@ from datetime import date
 API_KEY = "c5da7f6762e05a36fc3391a80e90e947"
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
-def convert_date(date):
+def convert_date(date, format):
     # YYYY - MM - DD
     months = [
         "January", "February", "March", "April", "May", "June", 
@@ -14,8 +14,24 @@ def convert_date(date):
     pieces_of_date = str(date).split("-")
     year = pieces_of_date[0]
     day = int(pieces_of_date[2])
+    suffixlist_st = [1, 21, 31]
+    suffixlist_nd= [2, 22]
+    suffixlist_rd = [3, 23]
+
+    if day in suffixlist_st:
+        suffix = "st"
+    elif day in suffixlist_nd:
+        suffix = "nd"
+    elif day in suffixlist_rd:
+        suffix = "rd"
+    else:
+        suffix = "th"
+    
     month = months[int(pieces_of_date[1])-1]
-    return f"{month} {day}, {year}"
+    if format== "mmddyyyy":
+        return f"{month} {day}, {year}"
+    if format== "wrong":
+        return f"the {day}{suffix} of {month}, {year}"
 
 def get_temp_color(temp):
     colors = [
@@ -96,7 +112,7 @@ def search_for_city(cityinput):
 
     response = requests.get(BASE_URL, params=params)
 
-    city_date = convert_date(date.today())
+    city_date = convert_date(date.today(), "wrong")
 
     if response.status_code == 200:
         data = response.json()
