@@ -56,7 +56,7 @@ def random_view(request):
     "Tokyo", "Brazil", "Cairo", "Germany", "Nairobi", "Mexico City", "Thailand", "Helsinki", "Lima", "Canada",
     "Istanbul", "Vietnam", "Jakarta", "Morocco", "Manila", "France", "Buenos Aires", "Norway", "Seoul", "Ethiopia",
     "Kuala Lumpur", "Italy", "Baghdad", "Russia", "Santiago", "Kenya", "Amsterdam", "India", "Riyadh", "Portugal",
-    "Beijing", "Spain", "Caracas", "Peru", "Athens", "Philippines", "New York", "South Africa", "Tehran", "Denmark",
+    "Beijing", "Spain", "Caracas", "Peru", "Athens", "Philippines", "New York", "Tehran", "Denmark",
     "Stockholm", "Pakistan", "Bangkok", "Colombia", "Oslo", "Algeria", "Addis Ababa", "Netherlands", "Doha", "Ukraine",
     "Los Angeles", "Saudi Arabia", "Warsaw", "Hungary", "Hanoi", "China", "Kigali", "Sweden", "Abu Dhabi", "Malaysia",
     "Lagos", "Poland", "Zurich", "Turkey", "Montreal", "Indonesia", "Tunis", "Serbia", "Toronto", "Iran",
@@ -75,19 +75,19 @@ def random_view(request):
     "Asmara", "Eritrea", "Djibouti", "Djibouti", "Mogadishu", "Somalia", "N'Djamena", "Chad", "Niamey", "Niger",
     "Yamoussoukro", "Ivory Coast", "Accra", "Ghana", "Lomé", "Togo", "Cotonou", "Benin", "Libreville", "Gabon",
     "Malabo", "Equatorial Guinea", "Brazzaville", "Congo", "Kigali", "Rwanda", "Bujumbura", "Burundi", "Maputo", "Mozambique",
-    "Harare", "Zimbabwe", "Windhoek", "Namibia", "Pretoria", "South Africa", "Gaza", "Palestine", "Jerusalem", "Israel",
+    "Harare", "Zimbabwe", "Windhoek", "Namibia", "Pretoria", "Gaza", "Palestine", "Jerusalem", "Israel",
     "Amman", "Jordan", "Beirut", "Lebanon", "Damascus", "Syria", "Tashkent", "Uzbekistan", "Bishkek", "Kyrgyzstan",
-    "Dushanbe", "Tajikistan", "Nur-Sultan", "Kazakhstan", "Pyongyang", "North Korea", "Seoul", "South Korea", "Taipei", "Taiwan",
+    "Dushanbe", "Tajikistan", "Nur-Sultan", "Kazakhstan", "Pyongyang", "North Korea", "Seoul", "Taipei", "Taiwan",
     "Tokyo", "Japan", "Canberra", "Australia", "Wellington", "New Zealand", "Sucre", "Bolivia", "Asunción", "Paraguay",
     "Montevideo", "Uruguay", "Paramaribo", "Suriname", "Georgetown", "Guyana", "Belmopan", "Belize", "Port-au-Prince", "Haiti",
     "Kingston", "Jamaica", "Havana", "Cuba", "Santo Domingo", "Dominican Republic", "San Juan", "Puerto Rico", "Panama City", "Panama",
     "San José", "Costa Rica", "Tegucigalpa", "Honduras", "Managua", "Nicaragua", "Port of Spain", "Trinidad and Tobago", "Castries", "Saint Lucia",
-    "Bridgetown", "Barbados", "Roseau", "Dominica", "Basseterre", "Saint Kitts and Nevis", "St. George's", "Grenada", "Kingstown", "Saint Vincent and the Grenadines",
+    "Bridgetown", "Barbados", "Roseau", "Dominica", "Basseterre",  "St. George's", "Grenada", "Kingstown", "Saint Vincent and the Grenadines",
     "Victoria", "Seychelles", "Port Louis", "Mauritius", "Antananarivo", "Madagascar", "Moroni", "Comoros", "São Tomé", "São Tomé and Príncipe",
     "Colombo", "Sri Lanka", "Male", "Maldives", "Singapore", "Singapore", "Honiara", "Solomon Islands", "Tarawa", "Kiribati"
 ]
         
-    city_target = cities[random.randint(0, 299)].lower()
+    city_target = cities[random.randint(0, 295)].lower()
         
     if search_for_city(city_target)['valid'] == True:
         return redirect('city', city_name = city_target, units="metric")

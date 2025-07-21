@@ -23,7 +23,7 @@
 
 <body>
     <h1 style="text-align: center"> Weather in {{ name }}, on {{ date }} </h1>
-    <h3 style="text-align: center"> This page uses {{ units }} units. <a href="/search/{{ snake_cased_name }}/{{ reverse_units }}"> Switch to {{ reverse_units }} </a> </h3>
+    <h3 style="text-align: center"> This page uses {{ units }} units. <a href="/search/{{ snake_cased_name }}/{{ reverse_units }}"> Switch to {{ reverse_units }}? </a> </h3>
 
     <div class="main_div">
 
@@ -59,7 +59,8 @@
 
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
 
-        <div class="small_filler"> </div>
+        <a href="/input/random" class="search_button"> Try another Random Place </a> <br> </br>
+        <div class="small_filler"> . </div>
 
         <a href="/" class="search_button"> HOME </a>
 
