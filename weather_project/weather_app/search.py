@@ -19,30 +19,55 @@ def convert_date(date):
 
 def get_temp_color(temp):
     colors = [
-        "#BDF6FF", "#35C3D9", "#61D7AC", "#5BE673",
-        "#52D936", "#FDF670", "#FFB54C", "#FF8C7A", "#FA6969"
+        "#FBFEFF", "#BDF6FF", "#35C3D9", "#61D7AC", "#8DFFDD",
+        "#FFFEB6", "#FDF670", "#FFB54C", "#FF8C7A", "#FA6969",
               ]
     color_index = math.floor(temp/5) # returns greatest integer < temp 
 
+    if color_index < 0:
+        color_index = -1
+    
     if color_index > 7: # handles if we have temp > 40 dg celsius
         color_index = 8
     
-    temp_color = colors[color_index]
+    temp_color = colors[color_index + 1]
 
     return temp_color
 
 def get_weather_image(weather):
-    clouds = [ ]
-    sun = [ ]
-    rain = [ ]
-    snow = [ ]
-    storm = [ ]
+    weather_name = weather.lower()
+
+    possible_image_values = {
+        "sun" : "images/sunny.png",
+        "rain" : "images/rain.png",
+        "cloud" : "images/cloud.png",
+        "storm" : "images/storm.png",
+        "snow" : "images/snow.webp",
+        "clear" : "images/clear.png",
+    }
     
-    # find the different forms of weather that the api uses, categorize them, find a way to filter and search, return that value
-    # js do an "if weather in clouds: weather_image = saldfjads;f"
-    # if weather in sun: weather_image = asdfja;sdlfkj
-    # an so on
+    image_value = None
+    for key in possible_image_values.keys():
+        if key in weather_name:
+            image_value = possible_image_values[key]
+            
+    if image_value == None:
+        image_value = '0'
+        
+    return image_value
+
+def convert_to_imperial(city_data):
+    city_temp_c = int(city_data['temperature'].strip(" °C"))
+    city_temp_f = int((city_temp_c*18) + 320) / 10
     
+    city_wind_speed_mps = float(city_data['wind_speed'].strip(" m/s"))
+    city_wind_speed_mph = (int(city_wind_speed_mps*22.3694) / 10)
+    
+    city_data['temperature'] = f"{city_temp_f} °F"
+    city_data['wind_speed'] = f"{city_wind_speed_mph} mph"
+    
+    return city_data
+
 def search_for_city(cityinput): 
     city = cityinput.replace("_", " ").title()
     
@@ -59,17 +84,18 @@ def search_for_city(cityinput):
     if response.status_code == 200:
         data = response.json()
         city_temp = round(data['main']['temp'])
-        city_weather_description = data['weather'][0]['description']
+        city_weather_description = data['weather'][0]
         city_humidity = data['main']['humidity']
         city_wind_speed = data['wind']['speed']
         return {
             'valid' : True,
             'name' : city,
-            'temperature' : city_temp, # celsius
+            'temperature' : f"{city_temp} °C", # celsius
             'temp_color' : get_temp_color(city_temp), # hex
-            'weather' : city_weather_description,
+            'weather_image' : get_weather_image(city_weather_description['main']),
+            'weather' : city_weather_description['description'],
             'humidity' : city_humidity, # %
-            'wind_speed' : city_wind_speed, # m/s
+            'wind_speed' : f"{city_wind_speed} m/s", # m/s
             'date' : city_date, 
         }
         
@@ -78,31 +104,10 @@ def search_for_city(cityinput):
             'valid' : False,
             'name' : None,
             'temperature' : None,  # celsius
-            'temp_color' : get_temp_color(city_temp), # hex
+            'temp_color' : None, # hex
+            'weather_image' : None,
             'weather' : None,
             'humidity' : None, # %
             'wind_speed' : None, # m/s
             'date' : None,
         }
-        
-        
-        
-"""
-Clear: Clear skies.
-Sunny: Direct sunlight.
-Partly cloudy: Some clouds in the sky.
-Mostly cloudy: Mostly cloudy with some clear patches.
-Overcast: Completely covered by clouds.
-Light rain: Gentle rainfall.
-Rain: Moderate rainfall.
-Heavy rain: Intense rainfall.
-Light snow: Light snowfall.
-Snow: Moderate snowfall.
-Thunderstorm: Storm with thunder and lightning.
-Scattered clouds: Clouds scattered across the sky.
-Broken clouds: A mix of clouds and clear skies, with some clouds covering the sky.
-Few clouds: A small amount of clouds in the sky.
-Scattered showers: Showers occurring in scattered locations.
-Freezing drizzle: Drizzle that freezes upon contact with surfaces.
-Sleet snow: A mix of rain and snow.
-"""

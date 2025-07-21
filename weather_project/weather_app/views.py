@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
+from .search import convert_to_imperial
 from .search import search_for_city
 
 def main(request):
@@ -31,22 +32,33 @@ def change_url(request):
         return redirect('change_url', parameter=user_input, context=context)
     return render(request, template)
 
-
 def input_view(request): 
     if request.method == "POST":
         city_target = request.POST.get('user_input').replace(" ", "_")
-        if city_target:
-            return redirect('city', city_name = city_target)
+        units = request.POST.get('unit_type')
+        if units == "on":
+            units = "imperial"
+        else:
+            units = "metric"
+        if search_for_city(city_target)['valid'] == True:
+            return redirect('city', city_name = city_target, units=units)
+        else:
+            return redirect('city', city_name = "invalid", units = "invalid")
     
     template = loader.get_template("blank.html")    
     return HttpResponse(template.render({}, request))
 
-def city_view(request, city_name):
-    context = search_for_city(city_name)
-    print(context['temp_color'])
-    if context['valid'] == True:
+def city_view(request, city_name, units):
+    prep_context = search_for_city(city_name)
+
+    if prep_context['valid'] == True:
         template = loader.get_template('index.html')
+        context = prep_context
+        if units == "imperial": # shush, please
+            context = convert_to_imperial(prep_context)
+        
         return HttpResponse(template.render(context, request))
-    if context['valid'] == False:
+    elif prep_context['valid'] == False:
         template = loader.get_template('blank.html')
+        context = prep_context
         return HttpResponse(template.render(context, request))

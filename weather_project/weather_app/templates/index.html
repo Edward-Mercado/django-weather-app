@@ -26,10 +26,11 @@
         <div class="attribute" style="background-color: {{ temp_color }}; color: black;">
             <img src={% static "images/thermometer.png" %} width="120" height="100">
             <h1> TEMPERATURE </h1>
-            <h2> {{ temperature }}°C </h2>
+            <h2> {{ temperature }} </h2>
         </div>
 
         <div class="attribute">
+            <img src={% static weather_image %} width="200" height="100">
             <h1> DESCRIPTION OF WEATHER </h1>
             <h2> {{ weather }} </h2>
         </div>
@@ -37,13 +38,13 @@
         <div class="attribute">
             <img src={% static "images/humidity.png" %} width="100" height="100">
             <h1> HUMIDITY </h1>
-            <h2> {{ humidity }}%% </h2>
+            <h2> {{ humidity }}% </h2>
         </div>
 
         <div class="attribute">
             <img src={% static "images/wind.png" %} width="200" height="100">
             <h1> WIND SPEED </h1>
-            <h2> {{ wind_speed }}m/s </h2>
+            <h2> {{ wind_speed }} </h2>
         </div>
 
         <div style="padding:6px"> </div>

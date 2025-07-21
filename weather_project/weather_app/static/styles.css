@@ -18,10 +18,13 @@ body {
 }
 
 .search_box_div {
-    height: 100px;
+    height: 150px;
     width: 300px;
     background-color: white;
     padding: 12px;
+    border-color: black;
+    border-style: solid;
+    color: #161835;
 }
 
 .attribute {

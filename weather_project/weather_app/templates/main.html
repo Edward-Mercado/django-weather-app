@@ -14,7 +14,10 @@
         <div style="width:50%;margin:10px auto" class="search_box_div">
             <form method="POST" action="input/">
             {% csrf_token %}
+            <label for="user_input"> City Name: </label>
             <input type="text" id="user_input" name="user_input" required> <br> </br>
+            <label for="units"> Use Imperial Units </label>
+            <input type="checkbox" id="units" name="unit_type"> <br> </br>
             <button type="submit" class = "search_button"> SEARCH </button> 
         </form>
         </div>
