@@ -205,4 +205,3 @@ def search_for_city(cityinput):
             "units": "metric",
             "reverse_units": "imperial",
         }
-        

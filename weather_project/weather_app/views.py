@@ -7,6 +7,7 @@ from .search import convert_date
 from datetime import date
 import json
 import random
+import os
 
 def main(request):
     template = loader.get_template('main.html')
@@ -52,9 +53,13 @@ def input_view(request):
     template = loader.get_template("blank.html")    
     return HttpResponse(template.render({}, request))
 
-def random_view(request):    
-    with open("cities.json", "r") as file:
-        cities = json.load(file)
+def random_view(request):
+    current_dir = os.path.dirname(__file__)
+    json_path = os.path.join(current_dir, 'cities.json')
+
+    with open(json_path, 'r', encoding='utf-8') as f:
+        cities = json.load(f)    
+    
     city_target = cities[random.randint(0, 295)].lower()
         
     if search_for_city(city_target)['valid'] == True:
