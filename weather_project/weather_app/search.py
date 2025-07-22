@@ -1,9 +1,18 @@
-import requests, math
+import requests, math, datetime
 from datetime import date
 
 API_KEY = "c5da7f6762e05a36fc3391a80e90e947"
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
+def snake_case(text=str, reverse=bool, title=bool):
+    if reverse==False:
+        return text.replace(" ", "_").lower()
+    else:
+        if title==True:
+            return text.replace("_", " ").title()
+        else:
+            return text.replace("_", " ")
+        
 def convert_date(date, format):
     # YYYY - MM - DD
     months = [
@@ -32,6 +41,27 @@ def convert_date(date, format):
         return f"{month} {day}, {year}"
     if format== "wrong":
         return f"the {day}{suffix} of {month}, {year}"
+
+def get_formatted_time(units):
+    date_and_time = str(datetime.datetime.now())
+
+    current_time = date_and_time.split(" ")[1] # returns just the time piece (not the date)
+    rounded_time = current_time.split(".")[0] # returns the time without miliseconds
+    pieces_of_time = rounded_time.split(":") # returns the time as a list of [hour, minute, second]
+    if units == "imperial":
+        day_half = "AM"
+        
+        if int(pieces_of_time[0]) > 12:
+            pieces_of_time[0] = str(int(pieces_of_time) - 12)
+            day_half = "PM"
+        elif int(pieces_of_time[0]) == 12:
+            day_half = "PM"
+        elif int(pieces_of_time[0]) == 0:
+            pieces_of_time[0] == 12
+            
+        return f"{pieces_of_time[0]}:{pieces_of_time[1]} {day_half} (EST)"
+    else:
+        return f"{pieces_of_time[0]}:{pieces_of_time[1]} (EST)"
 
 def get_temp_color(temp):
     colors = [
@@ -81,6 +111,7 @@ def convert_to_imperial(city_data):
     
     city_data['temperature'] = f"{int(city_temp_f)} °F"
     city_data['wind_speed'] = f"{city_wind_speed_mph} mph"
+    city_data['time'] = get_formatted_time("imperial")
     city_data['units'] = "imperial"
     city_data['reverse_units'] = "metric"
     
@@ -101,7 +132,7 @@ def check_search_validity(cityinput):
         return False
 
 def search_for_city(cityinput): 
-    snake_cased_name = cityinput
+    snake_cased_name = snake_case(cityinput, False, False)
     city = cityinput.replace("_", " ").title()
     
     params = {
@@ -131,6 +162,7 @@ def search_for_city(cityinput):
             'humidity' : city_humidity, # %
             'wind_speed' : f"{city_wind_speed} m/s", # m/s
             'date' : city_date, 
+            "time" : get_formatted_time("metric"),
             "units": "metric",
             "reverse_units": "imperial",
         }

@@ -11,45 +11,33 @@
 
 <body>
     <h1 style="text-align: center"> WEATHER API TESTER </h1>
-    <div class="main_div">
-        <h1> Search for a city or a country. </h1>
+    <div class="main_div" style="justify-content: flex-start">
+        <h1 style="text-align: center"> Search for a city or a country. </h1> <br>
         <div style="width:50%;margin:10px auto; height: 120px" class="search_box_div">
             <form method="POST" action="input/">
             {% csrf_token %}
-            <label for="user_input"> City Name: </label>
+            <label for="user_input"> City Name: </label> 
             <input type="text" id="user_input" name="user_input" required> <br> </br>
             <label for="units"> Search with Imperial Units </label>
-            <input type="checkbox" id="units" name="unit_type"> <br> </br>
-            <button type="submit" class = "search_button"> SEARCH </button> <br> </br>
+            <input type="checkbox" id="units" name="unit_type">
+            <button type="submit" class = "search_button"> SEARCH </button> 
         </form>
-        <div class="big_filler"> 
-            <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
-        </div>
-    <a href="/input/random" class="search_button"> Try a Random Place </a>
+
     </div>
     <div class="big_filler"> 
-            <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
+            <p style="font-size: 12px; font-color: rgba(0, 0, 0, 0);"> . </p>
         </div>
     </div>
 
     <div class="big_filler"> 
-        <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
+        <p style="font-size: 12px; font-color: rgba(0, 0, 0, 0);"> . </p>
     </div>
 
     <div class="main_div" style="padding-top: 20px">
-        <h1 style="text-align: center"> COMMON CITIES </h1>
+        <h1 style="text-align: left"> COMMON CITIES... </h1>
         <a href="/search/new_york/metric" class="search_button"> New York, USA </a>
-        <div class="big_filler"> 
-        <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
-    </div>
         <a href="/search/london/metric" class="search_button"> London, UK </a>
-        <div class="big_filler"> 
-        <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
-    </div>
         <a href="/search/moscow/metric" class="search_button"> Moscow, Russia </a>
-        <div class="big_filler"> 
-        <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
-    </div>
         <a href="/search/manila/metric" class="search_button"> Manila, Philippines </a>
     </div>
 
