@@ -126,10 +126,32 @@ def check_search_validity(cityinput):
     "units": "metric"
     })
 
-    if response.status_code == 200:
-        return True
-    else:
-        return False
+    return response.status_code == 200
+
+def get_humidity_descriptor(humidity):
+    humidity_descriptors = [
+        {
+            'minimum': 0,
+            'maximum': 20,
+            'description': "asdf",
+        },
+        {
+            'minimum': 0,
+            'maximum': 20,
+            'description': "asdf",
+        },
+        {
+            'minimum': 0,
+            'maximum': 20,
+            'description': "asdf",
+        },
+    ]
+    
+    for humidity_descriptor in humidity_descriptors:
+        if humidity >= humidity_descriptor['minimum'] and humidity <= humidity_descriptor['maximum']:
+            return humidity_descriptor['description']
+    
+    return 
 
 def search_for_city(cityinput): 
     snake_cased_name = snake_case(cityinput, False, False)
@@ -159,7 +181,8 @@ def search_for_city(cityinput):
             'temp_color' : get_temp_color(city_temp), # hex
             'weather_image' : get_weather_image(city_weather_description['main']),
             'weather' : city_weather_description['description'],
-            'humidity' : city_humidity, # %
+            'humidity' : city_humidity, # %]
+            'humidity_descriptor' : get_humidity_descriptor(city_humidity),
             'wind_speed' : f"{city_wind_speed} m/s", # m/s
             'date' : city_date, 
             "time" : get_formatted_time("metric"),
@@ -182,3 +205,4 @@ def search_for_city(cityinput):
             "units": "metric",
             "reverse_units": "imperial",
         }
+        

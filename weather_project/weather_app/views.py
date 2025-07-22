@@ -5,6 +5,7 @@ from .search import convert_to_imperial
 from .search import search_for_city
 from .search import convert_date
 from datetime import date
+import json
 import random
 
 def main(request):
@@ -51,42 +52,9 @@ def input_view(request):
     template = loader.get_template("blank.html")    
     return HttpResponse(template.render({}, request))
 
-def random_view(request):
-    cities = [
-    "Tokyo", "Brazil", "Cairo", "Germany", "Nairobi", "Mexico City", "Thailand", "Helsinki", "Lima", "Canada",
-    "Istanbul", "Vietnam", "Jakarta", "Morocco", "Manila", "France", "Buenos Aires", "Norway", "Seoul", "Ethiopia",
-    "Kuala Lumpur", "Italy", "Baghdad", "Russia", "Santiago", "Kenya", "Amsterdam", "India", "Riyadh", "Portugal",
-    "Beijing", "Spain", "Caracas", "Peru", "Athens", "Philippines", "New York", "Tehran", "Denmark",
-    "Stockholm", "Pakistan", "Bangkok", "Colombia", "Oslo", "Algeria", "Addis Ababa", "Netherlands", "Doha", "Ukraine",
-    "Los Angeles", "Saudi Arabia", "Warsaw", "Hungary", "Hanoi", "China", "Kigali", "Sweden", "Abu Dhabi", "Malaysia",
-    "Lagos", "Poland", "Zurich", "Turkey", "Montreal", "Indonesia", "Tunis", "Serbia", "Toronto", "Iran",
-    "Casablanca", "Croatia", "Dubai", "Finland", "Berlin", "Romania", "Vienna", "Sudan", "Barcelona", "Ireland",
-    "Luanda", "Switzerland", "Munich", "Belgium", "Kinshasa", "Czech Republic", "Prague", "Slovakia", "Ankara", "Moroni",
-    "Sofia", "New Delhi", "Zagreb", "Greece", "Cape Town", "Mozambique", "Lusaka", "Slovenia", "Reykjavik", "Cameroon",
-    "Doha", "Estonia", "Panama City", "Ecuador", "Brussels", "Nicaragua", "Kampala", "Guatemala", "San Salvador", "Iceland",
-    "Kabul", "Kuwait City", "Kuwait", "La Paz", "Bolivia", "Caracas", "Samoa", "Bucharest", "Belgrade", "Latvia",
-    "Yerevan", "Georgia", "Quito", "Libya", "Vilnius", "Lithuania", "Skopje", "North Macedonia", "Tbilisi", "Malta",
-    "Ashgabat", "Turkmenistan", "Bratislava", "Kosovo", "Podgorica", "Montenegro", "Monaco", "Andorra", "San Marino", "Liechtenstein",
-    "Suva", "Fiji", "Valletta", "Nicosia", "Cyprus", "Muscat", "Oman", "Manama", "Bahrain", "Kathmandu",
-    "Nepal", "Bhutan", "Thimphu", "Ulaanbaatar", "Mongolia", "Honiara", "Solomon Islands", "Port Vila", "Vanuatu", "Majuro",
-    "Marshall Islands", "Palikir", "Micronesia", "Funafuti", "Tuvalu", "Nuku'alofa", "Tonga", "Port Moresby", "Papua New Guinea", "Apia",
-    "Bangui", "Central African Republic", "Bamako", "Mali", "Ouagadougou", "Burkina Faso", "Freetown", "Sierra Leone", "Monrovia", "Liberia",
-    "Gaborone", "Botswana", "Maseru", "Lesotho", "Bissau", "Guinea-Bissau", "Lilongwe", "Malawi", "Juba", "South Sudan",
-    "Asmara", "Eritrea", "Djibouti", "Djibouti", "Mogadishu", "Somalia", "N'Djamena", "Chad", "Niamey", "Niger",
-    "Yamoussoukro", "Ivory Coast", "Accra", "Ghana", "Lomé", "Togo", "Cotonou", "Benin", "Libreville", "Gabon",
-    "Malabo", "Equatorial Guinea", "Brazzaville", "Congo", "Kigali", "Rwanda", "Bujumbura", "Burundi", "Maputo", "Mozambique",
-    "Harare", "Zimbabwe", "Windhoek", "Namibia", "Pretoria", "Gaza", "Palestine", "Jerusalem", "Israel",
-    "Amman", "Jordan", "Beirut", "Lebanon", "Damascus", "Syria", "Tashkent", "Uzbekistan", "Bishkek", "Kyrgyzstan",
-    "Dushanbe", "Tajikistan", "Nur-Sultan", "Kazakhstan", "Pyongyang", "North Korea", "Seoul", "Taipei", "Taiwan",
-    "Tokyo", "Japan", "Canberra", "Australia", "Wellington", "New Zealand", "Sucre", "Bolivia", "Asunción", "Paraguay",
-    "Montevideo", "Uruguay", "Paramaribo", "Suriname", "Georgetown", "Guyana", "Belmopan", "Belize", "Port-au-Prince", "Haiti",
-    "Kingston", "Jamaica", "Havana", "Cuba", "Santo Domingo", "Dominican Republic", "San Juan", "Puerto Rico", "Panama City", "Panama",
-    "San José", "Costa Rica", "Tegucigalpa", "Honduras", "Managua", "Nicaragua", "Port of Spain", "Trinidad and Tobago", "Castries", "Saint Lucia",
-    "Bridgetown", "Barbados", "Roseau", "Dominica", "Basseterre",  "St. George's", "Grenada", "Kingstown", "Saint Vincent and the Grenadines",
-    "Victoria", "Seychelles", "Port Louis", "Mauritius", "Antananarivo", "Madagascar", "Moroni", "Comoros", "São Tomé", "São Tomé and Príncipe",
-    "Colombo", "Sri Lanka", "Male", "Maldives", "Singapore", "Singapore", "Honiara", "Solomon Islands", "Tarawa", "Kiribati"
-]
-        
+def random_view(request):    
+    with open("cities.json", "r") as file:
+        cities = json.load(file)
     city_target = cities[random.randint(0, 295)].lower()
         
     if search_for_city(city_target)['valid'] == True:
