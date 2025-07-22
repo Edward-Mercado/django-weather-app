@@ -5,40 +5,64 @@
 <head>
     <title> Weather API Demo Sorta Thing </title>
     <style> 
-
+        .home_screen_div {
+            display: flex;
+            flex-direction: row;
+        }
+        .input_box {
+            max-width: 60%;
+            color: rgba(0, 63, 92, 1);
+            background-color: rgba(215, 249, 255, 0.55);
+        }
+        .width_editing {
+            max_width: 50%;
+        }
+        @media (max-width: 1000px) {
+            .home_screen_div {
+                display: flex;
+                flex-direction: column;
+            }
+            .title_text {
+                text-align: center; 
+                margin: 20px;
+            }
+            .width_editing {
+                max_width: 100%;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <h1 style="text-align: center"> WEATHER API TESTER </h1>
-    <div class="main_div" style="justify-content: flex-start">
-        <h1 style="text-align: center"> Search for a city or a country. </h1> <br>
-        <div style="width:50%;margin:10px auto; height: 120px" class="search_box_div">
-            <form method="POST" action="input/">
-            {% csrf_token %}
-            <label for="user_input"> City Name: </label> 
-            <input type="text" id="user_input" name="user_input" required> <br> </br>
-            <label for="units"> Search with Imperial Units </label>
-            <input type="checkbox" id="units" name="unit_type">
-            <button type="submit" class = "search_button"> SEARCH </button> 
-        </form>
-
-    </div>
-    <div class="big_filler"> 
-            <p style="font-size: 12px; font-color: rgba(0, 0, 0, 0);"> . </p>
+    <div class="home_screen_div">
+        <div style="width:20%">
+            <h1 class="title_text"> WEATHER API TESTER </h1>
         </div>
-    </div>
+        <div class="main_div" style="justify-content: flex-start; width: 50%;">
+            <h1 class="width_editing" style="text-align: center"> Search for a city or a country. </h1> <br>
+            <div style="width:80%;margin:10px auto; height: 120px; padding: 20px;" class="search_box_div">
+                <form method="POST" action="input/">
+                {% csrf_token %}
+                <label for="user_input"> City Name: </label> 
+                <input type="text" id="user_input" name="user_input" required class="input_box"> <br> </br>
+                <label for="units"> Search with Imperial Units </label>
+                <input type="checkbox" id="units" name="unit_type">
+                <button type="submit" class = "search_button"> SEARCH </button> 
+                </form>
+            </div>
 
-    <div class="big_filler"> 
-        <p style="font-size: 12px; font-color: rgba(0, 0, 0, 0);"> . </p>
-    </div>
+            <div class="big_filler"> 
+                <p style="font-size: 12px; font-color: rgba(0, 0, 0, 0.0001);"> . </p>
+            </div>
 
-    <div class="main_div" style="padding-top: 20px">
-        <h1 style="text-align: left"> COMMON CITIES... </h1>
-        <a href="/search/new_york/metric" class="search_button"> New York, USA </a>
-        <a href="/search/london/metric" class="search_button"> London, UK </a>
-        <a href="/search/moscow/metric" class="search_button"> Moscow, Russia </a>
-        <a href="/search/manila/metric" class="search_button"> Manila, Philippines </a>
+            <div class="main_div" style="padding-top: 20px">
+                <h1 style="text-align: left"> COMMON CITIES... </h1>
+                <a href="/search/new_york/metric" class="search_button"> New York, USA </a>
+                <a href="/search/london/metric" class="search_button"> London, UK </a>
+                <a href="/search/moscow/metric" class="search_button"> Moscow, Russia </a>
+                <a href="/search/manila/metric" class="search_button"> Manila, Philippines </a>
+            </div>
+        </div>
     </div>
 
 </body>
