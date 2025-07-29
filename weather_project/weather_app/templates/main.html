@@ -2,67 +2,49 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
-<head>
-    <title> Weather API Demo Sorta Thing </title>
-    <style> 
-        .home_screen_div {
-            display: flex;
-            flex-direction: row;
-        }
-        .input_box {
-            max-width: 60%;
-            color: rgba(0, 63, 92, 1);
-            background-color: rgba(215, 249, 255, 0.55);
-        }
-        .width_editing {
-            max_width: 50%;
-        }
-        @media (max-width: 1000px) {
-            .home_screen_div {
-                display: flex;
-                flex-direction: column;
-            }
-            .title_text {
-                text-align: center; 
-                margin: 20px;
-            }
-            .width_editing {
-                max_width: 100%;
-            }
-        }
-    </style>
-</head>
+<html> 
+    <head>
+        <link rel="stylesheet" href="application.css">
+    </head>
 
-<body>
-    <div class="home_screen_div">
-        <div style="width:20%">
-            <h1 class="title_text"> WEATHER API TESTER </h1>
-        </div>
-        <div class="main_div" style="justify-content: flex-start; width: 50%;">
-            <h1 class="width_editing" style="text-align: center"> Search for a city or a country. </h1> <br>
-            <div style="width:80%;margin:10px auto; height: 120px; padding: 20px;" class="search_box_div">
+    <body>
+        <header>
+            <div class="title_div">
+                <h1> WEATHER API TESTER <h1>
+            </div>
+        </header>
+
+        <div class="main_content">
+            <div class="big">
+                <h2> SEARCH FOR A CITY! </h2> 
+                <hr style="border: 1px solid black; width: 80%;">
                 <form method="POST" action="input/">
                 {% csrf_token %}
-                <label for="user_input"> City Name: </label> 
-                <input type="text" id="user_input" name="user_input" required class="input_box"> <br> </br>
-                <label for="units"> Search with Imperial Units </label>
-                <input type="checkbox" id="units" name="unit_type">
+                <label for="user_input" class="input_text"> City Name: </label> 
+                <input type="text" id="user_input" name="user_input" required class="input_box"> <br>
+                <label for="units" class="input_text"> Search with Imperial Units </label>
+                <input type="checkbox" id="units" name="unit_type" class="custom_checkbox"> 
                 <button type="submit" class = "search_button"> SEARCH </button> 
                 </form>
             </div>
-
-            <div class="big_filler"> 
-                <p style="font-size: 12px; font-color: rgba(0, 0, 0, 0.0001);"> . </p>
+            <div class="small">
+                <h2> RANDOM CITY </h2>
+                <hr style="border: 1px solid black; width: 80%;">
+                <a href="/input/random" class="search_button"> GO TO RANDOM CITY </a>
             </div>
+        </div>
 
-            <div class="main_div" style="padding-top: 20px">
-                <h1 style="text-align: left"> COMMON CITIES... </h1>
+        <div class="main_content"> 
+            <div class="bigger">
+                <h2 class="fill"> POPULAR CITIES </h2> 
                 <a href="/search/new_york/metric" class="search_button"> New York, USA </a>
                 <a href="/search/london/metric" class="search_button"> London, UK </a>
                 <a href="/search/moscow/metric" class="search_button"> Moscow, Russia </a>
                 <a href="/search/manila/metric" class="search_button"> Manila, Philippines </a>
+                <a href="/search/dubai/metric" class="search_button"> Dubai, UAE </a>
+                <a href="/search/toronto/metric" class="search_button"> Toronto, Canada </a>
+                <a href="/search/beijing/metric" class="search_button"> Beijing, China </a>
             </div>
         </div>
-    </div>
-
-</body>
+    </body>
+</html>
