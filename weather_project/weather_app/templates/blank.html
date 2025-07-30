@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" href="{% static 'styles.css' %}">
+<link rel="stylesheet" href="{% static 'application.css' %}">
 
 <head>
     <title> Page not found! </title>
 </head>
 
 <body>
-    <h1 style="text-align: center"> PAGE NOT FOUND </h1>
+    <h2 style="text-align: center; font-size: 60px;"> PAGE NOT FOUND </h2>
+
+    <div class="main_content" style="padding-top: 20px">
+        <h1 style="text-align: center; color: white;"> CHECK OUT COMMON CITIES </h1>
+        <a href="/search/new_york/metric" class="search_button" style="max-height: 30px;"> New York, USA </a>
+        <a href="/search/london/metric" class="search_button" style="max-height: 30px;"> London, UK </a>
+        <a href="/search/moscow/metric" class="search_button" style="max-height: 30px;"> Moscow, Russia </a>
+        <a href="/search/manila/metric" class="search_button" style="max-height: 30px;"> Manila, Philippines </a>
+        <a href="/search/dubai/metric" class="search_button" style="max-height: 30px;"> Dubai, UAE </a>
+        <a href="/search/toronto/metric" class="search_button" style="max-height: 30px;"> Toronto, Canada </a>
+        <a href="/search/beijing/metric" class="search_button" style="max-height: 30px;"> Beijing, China </a>
+        <a href="/search/beijing/metric" class="search_button" style="max-height: 30px;"> Beijing, China </a>
+        <a href="/input/random" class="search_button" style="max-height: 30px;"> Random City </a> <br> </br>
+    </div>
+
     <div class="main_div">
-        <h3> Sorry! The location you searched does not appear to be callable. </h3>
+        <h2 style="text-align: center;"> Sorry! The location you searched does not appear to be callable. </h2>
         <div class="small_filler"> <p> . </p> </div>
         <a href="/" class="search_button"> Go Back Home </a>
         <div class="small_filler"> <p> . </p> </div>
     </div>
 
-    <div class="big_filler"> 
-        <p style="font-size: 12px; font-color: #e9fbff;"> . </p>
-    </div>
-
-    <div class="main_div" style="padding-top: 20px">
-        <h1 style="text-align: center"> OR CHECK OUT COMMON CITIES </h1>
-        <a href="/search/new_york/metric" class="search_button"> New York, USA </a>
-        <a href="/search/london/metric" class="search_button"> London, UK </a>
-        <a href="/search/moscow/metric" class="search_button"> Moscow, Russia </a>
-        <a href="/search/manila/metric" class="search_button"> Manila, Philippines </a>
-    </div>
 </body>

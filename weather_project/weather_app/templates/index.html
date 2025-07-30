@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" href="{% static 'application.css' %}">
 
 <head>
     <link rel="stylesheet" href="{% static 'application.css' %}">
@@ -16,7 +15,7 @@
         <div style="border-left: 2px solid black; height: 100px; margin: 4px"></div>
         <h2 style="text-align: center"> Last Updated: {{ time }} </h2>
     </div>
-    <div class="attributes">
+    <div class="t">
         <div class="attribute" style="background-color: {{ temp_color }}; color: black;">
             <img src={% static "images/thermometer.png" %} width="120" height="100">
             <h1> TEMPERATURE </h1>
@@ -51,9 +50,10 @@
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
 
     </div>
-        <div style="margin: 12px">  . </div>
-        <a href="/input/random" class="search_button"> Try another Random Place </a> <br> </br>
-        <div style="margin: 12px">  . </div>
-        <a href="/" class="search_button"> HOME </a>
+        
+    <div style="margin: 12px">  . </div>
+    <a href="/input/random" class="search_button"> Try another Random Place </a> <br> </br>
+    <div style="margin: 12px">  . </div>
+    <a href="/" class="search_button"> HOME </a>
 
 </body>
