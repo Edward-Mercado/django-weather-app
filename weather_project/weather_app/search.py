@@ -95,14 +95,33 @@ def get_weather_image(weather):
     # the weather description of the api will always give at least one of these phrases from the key, so i categorized them this way
     
     image_value = None
+    weather_shorthand = None
+    
     for key in possible_image_values.keys(): # get the keys from the dictionary
         if key in weather_name: # check if the name of the key is in the name of the weather (ex. is "cloud" in "partially cloudy")
+            weather_shorthand = key 
             image_value = possible_image_values[key] # if so grab the image url
             
+    possible_color_values = { # urls for the types of images that demonstrate the weather
+        "sun" : "#FFD195",
+        "rain" : "#87BBFF",
+        "cloud" : "#D2D4DB",
+        "storm" : "#6A75D8",
+        "snow" : "#FFFFFF",
+        "clear" : "#80C8DF",
+    } 
+    
+    color_value = None
+    for possible_color_value in possible_color_values.keys():
+        if weather_shorthand == possible_color_value:
+            color_value = possible_color_values[possible_color_value]
+            
     if image_value == None: # make it return SOMETHING (though my categorization already covers everything)
-        image_value = '0'
+        image_value = "images/clear.png"
+    if color_value == None:
+        color_value = "#80C8DF"
         
-    return image_value
+    return [image_value, color_value]
 
 def convert_to_imperial(city_data):
     city_temp_c = int(city_data['temperature'].strip(" °C")) # return the city temperature in celsius as an integer
@@ -135,40 +154,52 @@ def get_humidity_descriptor(humidity): # returns a short description for the hum
             'minimum': 0,
             'maximum': 20,
             'description': "very dry",
+            "color": "#D6D6D6", 
         },
         {
             'minimum': 21,
             'maximum': 40,
             'description': "a tad dry",
+            "color": "#DDBBBB", 
         },
         {
             'minimum': 41,
             'maximum': 60,
             'description': "comfortable",
+            "color": "#DB8D8D", 
         },
         {
             'minimum': 61,
             'maximum': 80,
             'description': "pretty humid",
+            "color": "#D37F7F", 
         },
         {
             'minimum': 81,
             'maximum': 94,
             'description': "very humid",
+            "color": "#B66363", 
         },
         {
             'minimum': 95,
             'maximum' : 100,
             'description' : 'like a sauna',
+            "color": "#F76969", 
         },
     ]
     
     for humidity_descriptor in humidity_descriptors:
         humidity = int(humidity) # round the humdity value (im pretty sure it already returns and integer but to be safe and im too lazy to check)
         if humidity >= humidity_descriptor['minimum'] and humidity <= humidity_descriptor['maximum']: # if it is in the range set
-            return humidity_descriptor['description'] # return its description
+            return [humidity_descriptor['description'], humidity_descriptor["color"]] # return its description
     
     return "invalid humidity value" # if for some reason my code doesnt work return something
+
+def get_wind_speed_timing(wind_speed):
+    rounded_wind_speed = round(wind_speed)
+    if rounded_wind_speed > 7:
+        return 0.5
+    return 8 - rounded_wind_speed
 
 def search_for_city(cityinput): # actual search function that calls the api
     snake_cased_name = snake_case(cityinput, False, False)
@@ -198,11 +229,14 @@ def search_for_city(cityinput): # actual search function that calls the api
             'name' : city,
             'temperature' : f"{city_temp} °C", # celsius
             'temp_color' : get_temp_color(city_temp), # hex
-            'weather_image' : get_weather_image(city_weather_description['main']),
+            'weather_image' : get_weather_image(city_weather_description['main'])[0], # image url
+            'weather_color' : get_weather_image(city_weather_description['main'])[1], # weather hex color
             'weather' : city_weather_description['description'],
             'humidity' : city_humidity, # %]
-            'humidity_descriptor' : get_humidity_descriptor(city_humidity),
+            'humidity_descriptor' : get_humidity_descriptor(city_humidity)[0],
+            'humidity_color' : get_humidity_descriptor(city_humidity)[1],
             'wind_speed' : f"{city_wind_speed} m/s", # m/s
+            'wind_speed_animation_time' : get_wind_speed_timing(city_wind_speed),
             'date' : city_date, 
             "time" : get_formatted_time("metric"),
             "units": "metric",

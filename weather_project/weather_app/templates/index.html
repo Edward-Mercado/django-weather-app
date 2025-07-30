@@ -24,7 +24,7 @@
 
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
 
-        <div class="attribute">
+        <div class="attribute" style="background-color: {{ weather_color }}">
             <img src={% static weather_image %} width="200" height="100">
             <h1> DESCRIPTION OF WEATHER </h1>
             <h2> {{ weather }} </h2>
@@ -32,7 +32,7 @@
         
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
 
-        <div class="attribute">
+        <div class="attribute" style="background-color: {{ humidity_color }}; color: black;">
             <img src={% static "images/humidity.png" %} width="100" height="100">
             <h1> HUMIDITY </h1>
             <h2> {{ humidity }}% </h2>
@@ -40,11 +40,12 @@
         </div>
 
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
-
         <div class="attribute">
-            <img src={% static "images/wind.png" %} width="200" height="100">
-            <h1> WIND SPEED </h1>
-            <h2> {{ wind_speed }} </h2>
+            <div class="wind_speed_div" style="animation-duration: {{ wind_speed_animation_time}}s">
+                <img src={% static "images/wind.png" %} width="200" height="100">
+                <h1> WIND SPEED </h1>
+                <h2> {{ wind_speed }} </h2>
+            </div>
         </div>
 
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>

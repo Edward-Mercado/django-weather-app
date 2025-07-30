@@ -55,6 +55,7 @@ def city_view(request, city_name, units): # the random_view and input_view funct
             context = convert_to_imperial(prep_context) # change the context to our prepped context after imperial conversion
             context['date'] = convert_date(date.today(), "mmddyyyy") # and change the date formatting
             
+        print(context['wind_speed_animation_time'])
         return HttpResponse(template.render(context, request)) # load the page
     
     elif prep_context['valid'] == False: # if its invalid

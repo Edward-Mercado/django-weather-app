@@ -16,15 +16,17 @@
         <div class="main_content">
             <div class="big">
                 <h2> SEARCH FOR A CITY! </h2> 
-                <hr style="border: 1px solid black; width: 80%;">
-                <form method="POST" action="input/">
-                {% csrf_token %}
-                <label for="user_input" class="input_text"> City Name: </label> 
-                <input type="text" id="user_input" name="user_input" required class="input_box"> <br>
-                <label for="units" class="input_text"> Search with Imperial Units </label>
-                <input type="checkbox" id="units" name="unit_type" class="custom_checkbox"> 
-                <button type="submit" class = "search_button"> SEARCH </button> 
-                </form>
+                <div style="border-left: 2px solid black; height: 100px; margin: 4px"></div>
+                <div id="center_button">
+                    <form method="POST" action="input/">
+                    {% csrf_token %}
+                    <label for="user_input" class="input_text"> City Name: </label> 
+                    <input type="text" id="user_input" name="user_input" required class="input_box"> <br>
+                    <label for="units" class="input_text"> Search with Imperial Units </label>
+                    <input type="checkbox" id="units" name="unit_type" class="custom_checkbox"> 
+                    <button type="submit" class="search_button" style="width: 95%;"> SEARCH </button>
+                    </form>
+                </div>
             </div>
             <div class="small">
                 <h2> RANDOM CITY </h2>
