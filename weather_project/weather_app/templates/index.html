@@ -40,12 +40,10 @@
         </div>
 
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
-        <div class="attribute">
-            <div class="wind_speed_div" style="animation-duration: {{ wind_speed_animation_time}}s">
-                <img src={% static "images/wind.png" %} width="200" height="100">
-                <h1> WIND SPEED </h1>
-                <h2> {{ wind_speed }} </h2>
-            </div>
+        <div class="attribute wind_speed_div" style="animation-name: wind_movement; animation-duration: {{ wind_speed_animation_time}}s;">
+            <img src={% static "images/wind.png" %} width="200" height="100">
+            <h1> WIND SPEED </h1>
+            <h2> {{ wind_speed }} </h2>
         </div>
 
         <div class="big_filler"><p style="font-size: 12px; font-color: #e9fbff;"> . </p></div>
