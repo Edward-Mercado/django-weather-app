@@ -31,6 +31,16 @@ h2 {
     padding: 20px;
 }
 
+.attributes {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    background-color: rgb(10, 40, 95);
+    border: black solid 10px;
+    border-radius: 25px; 
+    padding: 20px;
+}
+
 .big {
     text-align: center;
     justify-content: center;
