@@ -68,6 +68,7 @@ def get_temp_color(temp):
         "#FBFEFF", "#BDF6FF", "#35C3D9", "#61D7AC", "#8DFFDD",
         "#FFFEB6", "#FDF670", "#FFB54C", "#FF8C7A", "#FA6969",
               ]
+    
     color_index = math.floor(temp/5) # floor function returns greatest integer < temp 
     # divide by 5 so each increment of 5 dg celsius moves you up one "hotter" color
 
