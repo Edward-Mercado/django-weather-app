@@ -50,7 +50,6 @@ def get_formatted_time(units):
     pieces_of_time = rounded_time.split(":") # returns the time as a list of [hour, minute, second]
     if units == "imperial": # this will be in the AM/PM format
         day_half = "AM" # default AM
-        
         if int(pieces_of_time[0]) > 12: # if we are in the second half of the day, convert to PM
             pieces_of_time[0] = str(int(pieces_of_time) - 12)
             day_half = "PM"
@@ -103,7 +102,7 @@ def get_weather_image(weather):
             weather_shorthand = key 
             image_value = possible_image_values[key] # if so grab the image url
             
-    possible_color_values = { # urls for the types of images that demonstrate the weather
+    possible_color_values = { # urls for the types of colors that demonstrate the weather
         "sun" : "#FFD195",
         "rain" : "#87BBFF",
         "cloud" : "#D2D4DB",
